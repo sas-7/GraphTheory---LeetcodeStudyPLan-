@@ -27,3 +27,37 @@ public:
         return -1;
     }
 };
+
+//Using BFS
+class Solution {
+public:
+    int dr[8]={-1,-1,0,1,1,1,0,-1};
+    int dc[8]={0,1,1,1,0,-1,-1,-1};
+    int shortestPathBinaryMatrix(vector<vector<int>>& grid) {
+        int n=grid.size(),m=grid[0].size();
+        if(grid[0][0]==1) return -1;
+        if(n==1 && m==1) return 1;
+        queue<pair<int,int>>q;
+        q.push({0,0});
+        grid[0][0]=1;
+        int dist=1;
+        while(!q.empty()){
+            int size=q.size();
+            while(size--){
+                auto it=q.front();
+                q.pop();
+                int row=it.first,col=it.second;
+                if(row==n-1 && col==m-1) return dist;
+                for(int i=0;i<8;i++){
+                    int nrow=row+dr[i],ncol=col+dc[i];
+                    if(nrow>=0 && nrow<n && ncol>=0 && ncol<m && grid[nrow][ncol]==0){
+                        grid[nrow][ncol]=1;
+                        q.push({nrow,ncol});
+                    }
+                }
+            }
+            dist++;
+        }
+        return -1;
+    }
+};
