@@ -1,9 +1,9 @@
 class Solution {
 public:
     int dr[4]={-1,0,1,0}; 
-	  int dc[4]={0,1,0,-1}; 
+    int dc[4]={0,1,0,-1}; 
     vector<vector<int>> updateMatrix(vector<vector<int>>& mat) {
-      int n=mat.size(),m=mat[0].size(); 
+            int n=mat.size(),m=mat[0].size(); 
 	    vector<vector<int>>vis(n,vector<int>(m,0)); 
 	    vector<vector<int>>dist(n,vector<int>(m,0)); 
 	    queue<pair<pair<int,int>,int>>q; 
