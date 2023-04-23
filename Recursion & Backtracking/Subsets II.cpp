@@ -1,28 +1,25 @@
 class Solution {
 public:
+    vector<vector<int>>ans;
     set<vector<int>>s;
     vector<vector<int>> subsetsWithDup(vector<int>& nums) {
         sort(nums.begin(),nums.end());
-        vector<vector<int>> ans; 
-        vector<int> v;
-        fun(ans,0,nums,v);
+        vector<int>v;
+        f(0,nums.size(),nums,v);
         return ans;
     }
-     void fun(vector<vector<int>> &ans,int i,vector<int>&nums,vector<int>&v){
-        if(i==nums.size()){
-            if(s.find(v) == s.end()){
+    void f(int idx,int n,vector<int>&nums,vector<int>&v){
+        if(idx==n){
+            if(s.find(v)==s.end()){
                 s.insert(v);
-                ans.push_back(v);   
+                ans.push_back(v);
             }
             return;
         }
-        //Take or pic the particular index into the subsequence
-        v.push_back(nums[i]);
-        fun(ans,i+1,nums,v);
-        //Backtrack
+        v.push_back(nums[idx]);
+        f(idx+1,n,nums,v);
         v.pop_back();
-        //Not Take
-       // To skip duplicates while(i+1<nums.size() && nums[i] == nums[i+1])i++;
-        fun(ans,i+1,nums,v);
+        // To skip duplicates while(i+1<nums.size() && nums[i] == nums[i+1])i++;
+        f(idx+1,n,nums,v);
     }
 };
